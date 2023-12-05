@@ -108,16 +108,24 @@ posts.forEach((element) =>{
 
     let secondoContent = document.createElement("div");
     secondoContent.className = "likes__cta";
-    secondoContent.innerHTML = '<a class="like-button  js-like-button" href="#" data-postid="1"><i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i><span class="like-button__label">Mi Piace</span></a>'
 
+    let like = document.createElement("a");
+    like.className = "like-button  js-like-button";
+    like.setAttribute = ("href", "#");
+    like.setAttribute = ("data-postid", "1");
+    like.innerHTML = '<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>';
+    like.innerHTML += '<span class="like-button__label">Mi Piace</span>'
 
     let secondoContent1 = document.createElement("div");
     secondoContent1.className = "likes__counter";
     secondoContent1.innerHTML = 'Piace a <b id="like-counter-1" class="js-likes-counter">'+element["likes"]+'</b> persone';
 
     //ASSEMBLO FOOTER
+    secondoContent.append(like);
+
     secondoContainer.append(secondoContent);
     secondoContainer.append(secondoContent1);
+    
     quartoFiglio.append(secondoContainer);
 
     //ASSEMBLO L'INTERO BLOCCO
