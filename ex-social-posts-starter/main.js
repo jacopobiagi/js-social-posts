@@ -109,12 +109,17 @@ posts.forEach((element) =>{
     let secondoContent = document.createElement("div");
     secondoContent.className = "likes__cta";
 
-    let like = document.createElement("a");
+    var like = document.createElement("a");
     like.className = "like-button  js-like-button";
-    like.setAttribute = ("href", "#");
-    like.setAttribute = ("data-postid", "1");
+    like.setAttribute("href", "#");
+    like.setAttribute("data-postid", "1");
+    like.setAttribute("onclick", "counterLike(" + posts.indexOf(element) + ", this);");
+
+
     like.innerHTML = '<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>';
-    like.innerHTML += '<span class="like-button__label">Mi Piace</span>'
+    like.innerHTML += '<span class="like-button__label">Mi Piace</span>';
+
+    
 
     let secondoContent1 = document.createElement("div");
     secondoContent1.className = "likes__counter";
@@ -137,3 +142,23 @@ posts.forEach((element) =>{
     //INSERIMENTO BLOCCO NELLA PAGINA
     container.append(padre);
 });
+
+
+function counterLike(index, like) {
+    console.log(posts[index].likes);
+
+    const currentLikes = posts[index].likes;
+
+    // Verifica se l'elemento è già "Mi Piace"
+    const isLiked = like.style.color === "green";
+
+    // Incrementa o decrementa il numero di "Mi Piace" in base alla situazione
+    posts[index].likes = isLiked ? currentLikes - 1 : currentLikes + 1;
+
+    // Aggiorna lo stile del pulsante
+    like.style.color = isLiked ? "black" : "green";
+
+    // Aggiorna il numero di "Mi Piace" nell'HTML
+    const likeCounter = like.closest('.post').querySelector('.js-likes-counter');
+    likeCounter.innerText = posts[index].likes;
+}
